@@ -20,7 +20,8 @@ export class LibraryCatalogue {
       return LibraryCatalogue.instance;
     }
     else{
-      return new LibraryCatalogue();
+      LibraryCatalogue.instance = new LibraryCatalogue();
+      return LibraryCatalogue.instance;
     }
   }
 
