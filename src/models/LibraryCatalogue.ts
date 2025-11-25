@@ -1,10 +1,32 @@
-import { Book } from "./Book";
+/**
+ * LIBRARY CATALOGUE (Singleton Pattern)
+ * Ensures only one instance of the catalogue exists.
+ * 
+ * SOLID Principles:
+ * - S (Single Responsibility): Manages collection of library items.
+ * - D (Dependency Inversion): Depends on abstraction (LibraryItem).
+ */
+
+import { LibraryItem } from "./LibraryItem";
 
 export class LibraryCatalogue {
-  private libraryItems: Book[] = [];
+  private libraryItems: LibraryItem[] = [];
+  private static instance: LibraryCatalogue;
+
+  private constructor(){}
+
+  public static getInstance():LibraryCatalogue {
+    if (LibraryCatalogue.instance) {
+      return LibraryCatalogue.instance;
+    }
+    else{
+      LibraryCatalogue.instance = new LibraryCatalogue();
+      return LibraryCatalogue.instance;
+    }
+  }
 
   // Method to add a book to the catalogue
-  public addItem(item: Book): void {
+  public addItem(item: LibraryItem): void {
     this.libraryItems.push(item);
     console.log(`Added: "${item.getTitle()}" to the catalogue.`);
   }
@@ -20,5 +42,6 @@ export class LibraryCatalogue {
     this.libraryItems.forEach((b) => b.display());
   }
 
+  
   
 }
